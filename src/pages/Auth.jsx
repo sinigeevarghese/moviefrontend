@@ -1,71 +1,83 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, useToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import { registerAPI } from '../services/allAPI';
+import { getuserApi } from '../services/allApi';
 
-function Auth({ register }) {
-  const isRegisterForm = register ? true : false
-  const navigate=useNavigate()
- 
+
+
+
+function Auth() {
+  const [inputuser, inputsetusers] = useState({
+    email: "",
+    password: ""
+  })
+  const [users, setusers] = useState([])
+  const getusers = async()=>{
+    const result = await getuserApi()
+    setusers(result.data);
+  }
+  const handleUpload= async(e)=>{
+    e.preventDefault() 
+    const {email,password} = inputuser
+    const user = users.map((item)=>item.email)
+    const pass =  users.map((item)=>item.password)
+    if( email==user && password==pass){
+      alert("Successfully Logined")
+    }
+    else{
+        alert("Something Went Wrong")
+    }
+  }
+  useEffect(()=>{
+    getusers()
+  },[])
   return (
     <>
-      <div style={{ marginTop: '50px' }} className='d-flex justify-content-center align-items-center mb-5'>
-        <div className='w-75 container'>
-          {/* <Link to={'/'} style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bolder' }}><i class='fa-solid fa-arrow-left'></i>Back to Home</Link> */}
-          <div className='card shadow p-3 ' >
-            <div className='row align-items-center'>
-              <div className='col-lg-3'>
-               
+      <div style={{height:'100vh',alignItems:'center' }} className='mb-5 bg-dark'>
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6 my-5">
+          <div className='card shadow p-3'>
+            <div className='row align-items-center justify-content-center'>
+              <div className='col-lg-2'></div> 
 
-              </div>
-
-              <div className='col lg-6'>
-                <div className='d-flex align-items-center flex-column'>
+              <div className='col lg-8'>
+                <div className='d-flex align-items-center justify-content-center flex-column'>
+                <img src="https://play-lh.googleusercontent.com/OxQ8Ib-B7jIbeyPTWFn4VofRKulY7KSzzKjj1PZRR8JfCuU4MCfhQuSYm-hSYaD0KHE" style={{width:'40px',marginRight:'10px'}} alt="" />
+           
                   <h1 className='fw-bolder text-light mt-2 text-dark'><i className='fa-solid fa-list-check me-2'></i>StreamIt</h1>
-                  <h5 className='fw-bolder text-dark'>
-                    {
-                      isRegisterForm ? 'sign up to your account' : 'sign in to your account'
-                    }
-                  </h5>
-                  <Form>
-                    {
-                      isRegisterForm &&
-                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Control type="text" placeholder="enter username" />
-                      </Form.Group>
-                    }
+                  <h5 className='fw-bolder text-dark text-center'>sign up to your account</h5>
+                  <Form className='my-3'>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                      <Form.Control type="email" placeholder="enter your email" />
+                      <label>Email</label>
+                      <input className='form-control w-100' type="email"  onChange={(e)=>inputsetusers({...inputuser,email:e.target.value})} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                      <Form.Control type="password" placeholder="enter your password"  />
+                      <label>Password</label>
+                      <input className='form-control w-100' type="password"  onChange={(e)=>inputsetusers({...inputuser,password:e.target.value})} />
                     </Form.Group>
-                    {
-                      isRegisterForm ?
-                        <div>
-                          <button className='btn btn-dark mb-2 ' style={{marginLeft:'110px'}} >Register</button>
-                          <p>Already have an account ? click here to <Link to={'/login'} style={{ textDecoration: 'none', color: 'green' }}>login</Link> </p>
-                        </div> :
-                        <div>
-                          <button className='btn btn-dark mb-2' style={{marginLeft:'80px'}}>Login</button>
-                          <p>New user ? click here to <Link to={'/register'} style={{ textDecoration: 'none', color: 'red' }}>register</Link> </p>
-                        </div>
-                    }
+                    <div>
+                      <button className='btn btn-danger mb-2' style={{marginLeft:'80px'}} onClick={handleUpload}><Link to={'/adminmovie'} style={{textDecoration:'none',color:'white'}}>Login</Link> </button> 
+                    </div>
                   </Form>
                 </div>
               </div>
-              <div className="col-3"></div>
+              <div className="col-2"></div>
             </div>
 
           </div>
         </div>
+          </div>
+          <div className="col-md-3"></div>
+        </div>
+      
+        
 <ToastContainer position="top-center"
 autoClose={3000}
 theme="colored"/>
-      </div>
+      
     </>
   )
 }

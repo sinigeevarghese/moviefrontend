@@ -1,0 +1,51 @@
+*{
+  margin: 0px;
+  padding: 0px;
+ 
+}
+.section1{
+  margin-left: 80px;
+  margin-right: 80px;
+}
+@media all and (max-width: 480px) {
+  .icons {display:none;}
+}
+.carosal1{
+  width: 100%;
+  background-image: url('https://i.ytimg.com/vi/uTaaoiWt0VU/maxresdefault.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: black;
+}
+.carosal2{
+  width: 100%;
+  background-image: url('https://www.bollywoodhungama.com/wp-content/uploads/2023/05/Ulajh-cover-image.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: black;
+}
+.carosal3{
+  width: 100%;
+  background-image: url('https://www.bollywoodhungama.com/wp-content/uploads/2023/06/Vedaa-banner.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: black;
+}
+.bg{
+  background-color: #0000009c;
+  height: 500px;
+  width: 100%;
+  padding: 250px 12px;
+  bottom: 8px;
+  width: 100%;
+  text-align: left;
+
+}
+.section1{
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 10px;
+}
