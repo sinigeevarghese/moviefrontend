@@ -33,7 +33,11 @@ const Seatbooking = () => {
     };
     const res = await bookMovieApi(scheduleData.id, reqBody);
     if (res.status < 300 && res.status >= 200) {
-      alert("SuccessFully Booked");
+      const numberOfTicket = seatReserved.length;
+      const ticketPrice = numberOfTicket * teatreData.Ticket_cost;
+      alert(`SuccessFully Booked
+             Seat Reserved: ${numberOfTicket} seats
+             Total Price: ${ticketPrice}`);
     } else {
       alert("Something went wrong");
     }
